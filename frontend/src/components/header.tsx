@@ -27,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                         <Menu className="h-6 w-6" />
                     </Button>
                     <span className="ml-2 text-xl font-bold">
-                        Procurement Dashboard 2
+                        Procurement Dashboard
                     </span>
                 </div>
 
