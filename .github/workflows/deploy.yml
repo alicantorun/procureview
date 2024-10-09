@@ -4,8 +4,6 @@ on:
     push:
         branches:
             - main
-        paths:
-            - "frontend/**"
 
 jobs:
     deploy:
@@ -29,4 +27,3 @@ jobs:
               with:
                   personal_token: ${{ secrets.PAT }}
                   publish_dir: ./frontend/dist
-                  cname: # If you have a custom domain, add it here
