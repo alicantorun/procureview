@@ -2,11 +2,8 @@
 import React from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
+
+import viteLogo from "/vite.svg";
 
 interface HeaderProps {
     toggleSidebar: () => void;
@@ -26,21 +23,11 @@ export const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                     >
                         <Menu className="h-6 w-6" />
                     </Button>
+                    <img src={viteLogo} className="logo" alt="Vite logo" />
                     <span className="ml-2 text-xl font-bold">
                         Procurement Dashboard
                     </span>
                 </div>
-
-                {/* Right side: Navigation Links (optional) */}
-                <NavigationMenu className="hidden md:flex">
-                    <NavigationMenuItem>
-                        <NavigationMenuLink href="#">Link 1</NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuLink href="#">Link 2</NavigationMenuLink>
-                    </NavigationMenuItem>
-                    {/* Add more links as needed */}
-                </NavigationMenu>
             </div>
         </header>
     );

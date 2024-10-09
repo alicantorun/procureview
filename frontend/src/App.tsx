@@ -233,8 +233,6 @@ export default function Dashboard() {
         <div className="flex flex-col min-h-screen">
             <Header toggleSidebar={toggleSidebar} />
             <div className="flex flex-1 pt-16">
-                {" "}
-                {/* Add pt-16 to account for the fixed header */}
                 <Sidebar isOpen={isSidebarOpen} />
                 <main
                     className={`flex-1 transition-all duration-200 ease-in-out ${
@@ -316,7 +314,6 @@ export default function Dashboard() {
                                 </CardContent>
                             </Card>
                         </div>
-
                         {/* Tabs */}
                         <Tabs
                             value={selectedTab}
@@ -577,7 +574,6 @@ export default function Dashboard() {
                                 </Card>
                             </TabsContent>
                         </Tabs>
-
                         {/* Recommendations Card */}
                         <Card className="mt-8">
                             <CardHeader>
@@ -599,7 +595,6 @@ export default function Dashboard() {
                                 </ul>
                             </CardContent>
                         </Card>
-
                         {/* Positive Developments Card */}
                         <Card className="mt-8">
                             <CardHeader>
@@ -621,7 +616,6 @@ export default function Dashboard() {
                                 )}
                             </CardContent>
                         </Card>
-
                         {/* AI-Driven Insights Card */}
                         <Card className="mt-8 mb-8">
                             <CardHeader>

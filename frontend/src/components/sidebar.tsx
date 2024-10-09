@@ -10,14 +10,11 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     return (
         <aside
-            className={`fixed top-16 left-0 z-30 w-64 h-full bg-white border-r transform transition-transform duration-200 ease-in-out ${
+            className={`fixed left-0 z-30 w-64 h-min-screen  border-r transform transition-transform duration-200 ease-in-out ${
                 isOpen ? "translate-x-0" : "-translate-x-full"
             } md:relative md:translate-x-0`}
         >
             <div className="flex flex-col h-full">
-                <div className="flex items-center justify-center h-16 border-b">
-                    <h2 className="text-xl font-semibold">Menu</h2>
-                </div>
                 <ScrollArea className="flex-1">
                     <nav className="p-4 space-y-2">
                         <a
