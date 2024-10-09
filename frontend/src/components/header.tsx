@@ -30,17 +30,6 @@ export const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                         Procurement Dashboard
                     </span>
                 </div>
-
-                {/* Right side: Navigation Links (optional) */}
-                <NavigationMenu className="hidden md:flex">
-                    <NavigationMenuItem>
-                        <NavigationMenuLink href="#">Link 1</NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuLink href="#">Link 2</NavigationMenuLink>
-                    </NavigationMenuItem>
-                    {/* Add more links as needed */}
-                </NavigationMenu>
             </div>
         </header>
     );
