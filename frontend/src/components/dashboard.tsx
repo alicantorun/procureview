@@ -9,7 +9,13 @@ import {
     ResponsiveContainer,
     TooltipProps,
 } from "recharts";
-import { CheckCircle, Calendar, Briefcase } from "lucide-react";
+import {
+    CheckCircle,
+    Calendar,
+    Briefcase,
+    AlertTriangle,
+    FileText,
+} from "lucide-react";
 import {
     Card,
     CardContent,
@@ -29,6 +35,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Separator } from "./ui/separator";
 
 // Types
 type ImpactCategory = {
@@ -67,6 +74,21 @@ type DashboardData = {
         total_spending: number;
         open_orders: number;
         affected_material_group: string;
+    };
+    ai_news_alert: {
+        category: string;
+        risk_level: string;
+        title: string;
+        news_date: string;
+        report_date: string;
+        content: string[];
+        ai_comment: string;
+        supplier_info: {
+            material_group: string;
+            spending: string;
+            open_orders: string;
+        };
+        potential_impacts: string[];
     };
 };
 
@@ -167,6 +189,30 @@ const data: DashboardData = {
         open_orders: 12000000,
         affected_material_group: "Aircraft Components",
     },
+    ai_news_alert: {
+        category: "Rubber Category",
+        risk_level: "Medium Level",
+        title: "Environmental Regulations in Southeast Asia Raise Rubber Prices: Production Contraction Expected",
+        news_date: "15 Sep, 2024",
+        report_date: "16 Sep, 2024",
+        content: [
+            "Global raw material markets are facing a major shock from Southeast Asia. Thailand, one of the leading rubber-producing countries along with Malaysia and Indonesia, has drawn attention with new environmental regulations set to take effect in early 2024. While these regulations aim to increase the sustainability of the rubber industry, they bring concerns about significant decreases in production capacity.",
+            "The Thai government has introduced strict controls and quotas on natural rubber plantations to prevent the depletion of natural resources and protect biodiversity. Under the new laws, expansion of existing cultivation areas is prohibited, and trees that do not meet certain yield standards are to be removed from the total production area. As a result of these steps, it is estimated that Thailand's rubber production capacity could decrease by up to 20 percent.",
+            'Thailand-based rubber giant ThaiRubber Corp. is evaluating the impact of these developments on its operations. In a statement from company officials, it was said, "We acknowledge that the new regulations will provide environmental sustainability in the long term, but in the short term, we may have to significantly reduce our production."',
+        ],
+        ai_comment:
+            "This news addresses the contraction in rubber production due to environmental regulations to be implemented in Southeast Asia and its effect on international rubber prices. In the customer data, Marmara Distributors is listed as the supplier related to rubber:",
+        supplier_info: {
+            material_group: "Rubber",
+            spending: "754.717m EUR",
+            open_orders: "None",
+        },
+        potential_impacts: [
+            "Raw Material Shortage or Non-Availability: There may be difficulties in raw material supply.",
+            "Product Inventory Shortages: Inventory management may be affected, costs may increase.",
+            "Natural Disasters/Regulation Changes: Operations in the sector may be reshaped.",
+        ],
+    },
 };
 
 const evaluationCriteria = [
@@ -235,6 +281,95 @@ const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
         );
     }
     return null;
+};
+
+const AINewsAlert: React.FC = () => {
+    return (
+        <Card className="w-full mx-auto mt-6">
+            <CardHeader>
+                <div className="flex justify-between items-center">
+                    <CardTitle className="text-2xl font-bold">
+                        Quibas AI News Alert
+                    </CardTitle>
+                    <Badge variant="destructive" className="uppercase">
+                        New
+                    </Badge>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <span className="font-medium">
+                        {data.ai_news_alert.category}
+                    </span>
+                    <Separator orientation="vertical" className="h-4" />
+                    <Badge variant="secondary">
+                        {data.ai_news_alert.risk_level}
+                    </Badge>
+                </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+                <div className="space-y-2">
+                    <h2 className="text-xl font-semibold">
+                        {data.ai_news_alert.title}
+                    </h2>
+                    <div className="flex space-x-4 text-sm text-muted-foreground">
+                        <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            <span>
+                                News Date: {data.ai_news_alert.news_date}
+                            </span>
+                        </div>
+                        <div className="flex items-center">
+                            <FileText className="w-4 h-4 mr-1" />
+                            <span>
+                                Report Date: {data.ai_news_alert.report_date}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="space-y-4">
+                    {data.ai_news_alert.content.map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                    ))}
+                </div>
+                <div className="bg-muted p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Quibas AI Comment</h3>
+                    <p className="text-sm">{data.ai_news_alert.ai_comment}</p>
+                    <ul className="list-disc list-inside text-sm mt-2 space-y-1">
+                        <li>
+                            Material Group:{" "}
+                            {data.ai_news_alert.supplier_info.material_group}
+                        </li>
+                        <li>
+                            Spending Amount:{" "}
+                            {data.ai_news_alert.supplier_info.spending}
+                        </li>
+                        <li>
+                            Open Orders:{" "}
+                            {data.ai_news_alert.supplier_info.open_orders}
+                        </li>
+                    </ul>
+                    <p className="text-sm mt-2">
+                        The effects of the news can be evaluated as follows:
+                    </p>
+                    <ol className="list-decimal list-inside text-sm mt-2 space-y-1">
+                        {data.ai_news_alert.potential_impacts.map(
+                            (impact, index) => (
+                                <li key={index}>{impact}</li>
+                            )
+                        )}
+                    </ol>
+                </div>
+            </CardContent>
+            <CardFooter className="flex justify-between items-center">
+                <div className="flex items-center text-yellow-600">
+                    <AlertTriangle className="w-5 h-5 mr-2" />
+                    <span className="font-medium">
+                        Risk Assessment Recommended
+                    </span>
+                </div>
+                <Button>Start Risk Assessment</Button>
+            </CardFooter>
+        </Card>
+    );
 };
 
 const ImpactCategoryChart: React.FC = () => {
@@ -597,6 +732,7 @@ export const Dashboard: React.FC = () => {
                             </Card>
                         </div>
                         <AIInsightsSection />
+                        <AINewsAlert />
                     </TabsContent>
 
                     {/* Impact Categories Tab */}
