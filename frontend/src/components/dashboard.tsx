@@ -731,8 +731,8 @@ export const Dashboard: React.FC = () => {
                                 </CardContent>
                             </Card>
                         </div>
-                        <AIInsightsSection />
                         <AINewsAlert />
+                        <AIInsightsSection />
                     </TabsContent>
 
                     {/* Impact Categories Tab */}
